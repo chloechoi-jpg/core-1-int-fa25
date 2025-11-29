@@ -73,5 +73,17 @@
  </main>
 
  <li>  <a href="p5js/">P5JS</a></li>
+
+
 </body>
 </html>
+
+<script>
+document.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
+  document.querySelectorAll(".float-img").forEach((img, i) => {
+    const speed = (i + 1) * 0.2; 
+    img.style.transform = `translateY(${scrollY * speed}px)`;
+  });
+});
+</script>

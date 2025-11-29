@@ -1,108 +1,339 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-/* === COLOR PALETTE: Dark Blue & White Luxury === */
-:root {
-  --color-primary: #0d1b2a;   /* deep navy background */
-  --color-secondary: #1b263b; /* darker blue accents */
-  --color-accent: #415a77;    /* mid-tone blue */
-  --color-tertiary: #778da9;  /* soft bluish-gray text */
-  --color-highlight: #f4f4f9; /* soft white text highlight */
 
+/* === COLORS & FONTS === */
+:root {
+  --color-background: #ffffff; /* white background */
+  --color-text: #4b2e2e;       /* rich brown text */
+  --color-secondary: #f3f1f0;  /* very light gray for card bg */
+  --color-accent: #8b5e3c;     /* subtle brown accent */
   --font-heading: "DM Sans", sans-serif;
   --font-body: "PT Serif", serif;
 }
 
+
 /* === BASE STYLES === */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
 }
+
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--color-primary);
-  color: var(--color-highlight);
-  line-height: 1.8;
+ font-family: var(--font-body);
+ background-color: var(--color-primary);
+ color: var(--color-highlight);
+ line-height: 1.8;
 }
+
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  color: var(--color-highlight);
-  margin-bottom: 1rem;
+ font-family: var(--font-heading);
+ color: var(--color-highlight);
+ margin-bottom: 1rem;
 }
 
+
 p {
-  color: var(--color-tertiary);
-  margin-bottom: 1rem;
+ color: var(--color-tertiary);
+ margin-bottom: 1rem;
 }
+
 
 /* === PHOTO GRID LAYOUT === */
 main.photo-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 3rem 2rem;
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+ gap: 2.5rem;
 }
+
 
 main.photo-grid .photo-item {
-  background-color: var(--color-secondary);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+ background-color: var(--color-secondary);
+ border-radius: 16px;
+ overflow: hidden;
+ box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+ transition: transform 0.3s ease, box-shadow 0.3s ease;
+ display: flex;
+ flex-direction: column;
+ text-align: left;
 }
 
+
 main.photo-grid .photo-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+ transform: translateY(-6px);
+ box-shadow: 0 12px 32px rgba(0,0,0,0.5);
 }
+
 
 /* Images */
 main.photo-grid .photo-item img {
-  width: 100%;
-  max-height: 220px;
-  object-fit: cover;
-  display: block;
+ width: 100%;
+ max-height: 220px;
+ object-fit: cover;
+ display: block;
 }
+
 
 /* Text inside card */
 main.photo-grid .photo-name {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  color: var(--color-highlight);
-  font-size: 1.2rem;
-  margin: 1rem 1rem 0.5rem 1rem;
+ font-family: var(--font-heading);
+ font-weight: 700;
+ color: var(--color-highlight);
+ font-size: 1.2rem;
+ margin: 1rem 1rem 0.5rem 1rem;
 }
 
+
 main.photo-grid .photo-caption {
-  font-family: var(--font-body);
-  color: var(--color-tertiary);
-  font-size: 0.95rem;
-  line-height: 1.4;
-  margin: 0 1rem 1rem 1rem;
+ font-family: var(--font-body);
+ color: var(--color-tertiary);
+ font-size: 0.95rem;
+ line-height: 1.4;
+ margin: 0 1rem 1rem 1rem;
 }
+
 
 /* === LINKS === */
 a.photo-link {
-  text-decoration: none;
-  color: inherit;
+ text-decoration: none;
+ color: inherit;
 }
+
 
 /* === RESPONSIVE GRID === */
 @media (max-width: 1024px) {
-  main.photo-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+ main.photo-grid {
+   grid-template-columns: repeat(2, 1fr);
+ }
 }
 
+
 @media (max-width: 768px) {
-  main.photo-grid {
-    grid-template-columns: 1fr;
-  }
+ main.photo-grid {
+   grid-template-columns: 1fr;
+ }
+}
+
+
+
+
+.floating-gallery {
+ position: relative;
+ height: 200vh; /* extends the scroll space */
+ width: 100%;
+ pointer-events: none; /* allows text scrolling without hitting images */
+}
+
+
+.float-img {
+ position: absolute;
+ width: 220px; /* adjust size */
+ object-fit: contain;
+ animation: float 6s ease-in-out infinite;
+ opacity: 0.95;
+ pointer-events: auto; /* allows hovering */
+ transition: transform 0.3s ease;
+}
+
+
+/* Subtle hover pop */
+.float-img:hover {
+ transform: scale(1.05);
+}
+
+
+/* Gentle floating motion */
+@keyframes float {
+ 0% { transform: translateY(0px); }
+ 50% { transform: translateY(-15px); }
+ 100% { transform: translateY(0px); }
+}
+
+
+/* Positioning each PNG manually */
+.img1 {
+ top: 10%;
+ left: 10%;
+}
+
+
+.img2 {
+ top: 40%;
+ right: 12%;
+}
+
+
+.img3 {
+ top: 70%;
+ left: 50%;
+}
+
+
+.float-img {
+ position: absolute;
+ width: 200px;
+ animation: float 6s ease-in-out infinite;
+}
+
+
+.img1 { top: 10%; left: 5%; }
+.img2 { top: 40%; right: 6%; }
+
+
+.floating-gallery {
+ position: relative;
+ width: 100%;
+ height: 250vh; /* makes the page tall enough to scroll */
+ pointer-events: none; /* so images don’t block text */
+}
+
+
+.float-img {
+ position: absolute;
+ width: 220px;
+ animation: float 5s ease-in-out infinite;
+ opacity: 0.9;
+}
+
+
+/* Randomized placements */
+.img1 { top: 5%; left: 10%; }
+.img2 { top: 20%; left: 60%; }
+.img3 { top: 45%; left: 30%; }
+.img4 { top: 70%; left: 75%; }
+
+
+/* Soft floating animation */
+@keyframes float {
+ 0%   { transform: translateY(0px); }
+ 50%  { transform: translateY(-20px); }
+ 100% { transform: translateY(0px); }
+}
+
+
+/* --- existing styles for layout, entry-layout, text, etc. --- */
+
+
+/* --- Floating gallery styles --- */
+.floating-gallery {
+ position: relative;
+ width: 100%;
+ height: 200vh; /* give enough vertical space for scrolling */
+ pointer-events: none; /* lets clicks and scrolls pass through to underlying content */
+}
+
+
+.float-img {
+ position: absolute;
+ width: 220px; /* adjust as you wish */
+ animation: float 6s ease-in-out infinite;
+ opacity: 0.9;
+ pointer-events: auto; /* allow hover or click on the image if you like */
+ transition: transform 0.3s ease;
+}
+
+
+/* add individual positions for each image */
+.img1 { top: 8%; left: 10%; }
+.img2 { top: 30%; left: 55%; }
+.img3 { top: 55%; left: 25%; }
+.img4 { top: 75%; left: 65%; }
+
+
+/* subtle floating animation */
+@keyframes float {
+ 0%   { transform: translateY(0px); }
+ 50%  { transform: translateY(-20px); }
+ 100% { transform: translateY(0px); }
+}
+
+
+/* back-button styling (optional) */
+.back-button {
+ display: inline-block;
+ margin: 40px 20px;
+ text-decoration: none;
+ color: var(--color-accent);
+ font-weight: 600;
+}
+
+
+.back-button:hover {
+ text-decoration: underline;
+}
+
+
+.page-wrapper {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 40px;
+}
+.title {
+ font-family: "Georgia", serif;
+ font-size: 80px;
+ letter-spacing: 4px;
+ text-transform: uppercase;
+}
+
+
+.title-red {
+ color: #d67a6a; /* or your figma color */
+}
+
+
+.title-black {
+ color: #111;
+}
+
+/* === Base body styles === */
+body {
+  font-family: var(--font-body);
+  line-height: 1.8;
+}
+
+/* === Entry-specific page styles with !important === */
+
+/* --- The MET (Entry-3) --- */
+.met-entry {
+  background-color: #fdf6ec !important; /* cream white */
+  color: #4b2e2e !important;           /* brown body text */
+}
+
+.met-entry h1 {
+  color: #d33c3c !important;           /* red title */
+}
+
+/* --- The MoMA (Entry-1) --- */
+.moma-entry {
+  background-color: #111111 !important; /* black */
+  color: #ffffff !important;            /* white text */
+}
+
+.moma-entry h1 {
+  color: #ffffff !important;            /* title white */
+}
+
+/* --- Whitney Museum of American Art (Entry-2) --- */
+.whitney-entry {
+  background-color: #7d7d7d !important; /* medium gray */
+  color: #ffffff !important;            /* white text */
+}
+
+.whitney-entry h1 {
+  color: #ffffff !important;            /* title white */
+}
+
+/* --- Guggenheim Museum (Entry-4) --- */
+.guggenheim-entry {
+  background-color: #cbbfa8 !important; /* light muted brown */
+  color: #4b2e2e !important;           /* brown text */
+}
+
+.guggenheim-entry h1 {
+  color: #8b5e3c !important;           /* accent brown title */
 }
